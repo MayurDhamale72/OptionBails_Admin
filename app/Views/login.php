@@ -43,17 +43,23 @@
             <div>
               <div><a class="logo" href="index.php"><img class="img-fluid for-light" src="../assets/images/logo/logo-1.png" alt="looginpage"><img class="img-fluid for-dark" src="../assets/images/logo/logo.png" alt="looginpage"></a></div>
               <div class="login-main"> 
-                <form class="theme-form">
+              <?php if(session()->getFlashdata('msg')):?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('msg')['error'] ?>
+    </div>
+<?php endif;?>
+
+                <form class="theme-form" action="/loginprocess" method="post">
                   <h3>Sign in to account</h3>
                   <p>Enter your email & password to login</p>
                   <div class="form-group">
                     <label class="col-form-label">Email Address</label>
-                    <input class="form-control" type="email" required="" placeholder="Test@gmail.com">
+                    <input class="form-control" type="email" name="email" required="" placeholder="Test@gmail.com">
                   </div>
                   <div class="form-group">
                     <label class="col-form-label">Password</label>
                     <div class="form-input position-relative">
-                      <input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
+                      <input class="form-control" type="password" name="password" required="" placeholder="*********">
                       <div class="show-hide"><span class="show">                         </span></div>
                     </div>
                   </div>
@@ -63,7 +69,7 @@
                       <label class="text-muted" for="checkbox1">Remember password</label>
                     </div><a class="link" href="forget-password.php">Forgot password?</a>
                     <div class="text-end mt-3">
-                      <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
+                      <button class="btn btn-primary btn-block w-100" type="submit" name="submit">Sign in</button>
                     </div>
                   </div>
                   <h6 class="text-muted mt-4 or">Or Sign in with</h6>
